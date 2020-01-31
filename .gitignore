@@ -1,12 +1,12 @@
 .DS_Store
 
-application/cache/*
-!application/cache/index.html
+bin/cache/*
+!bin/cache/index.html
 
-application/logs/*
-!application/logs/index.html
+bin/logs/*
+!bin/logs/index.html
 
-!application/*/.htaccess
+!bin/*/.htaccess
 
 composer.lock
 
