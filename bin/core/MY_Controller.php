@@ -10,17 +10,76 @@ class MY_Controller extends CI_Controller {
 
 class REST_Controller extends MY_Controller {
 
+	public $_auth;
 	public $_POST_GLOBAL;
 	public $_GET_GLOBAL;
 
 	public function __construct() {
 		parent::__construct();
+
+		$this->load->helper(['jwt', 'authorization']);
 		$this->prepareMethodData();
+		$this->setAuthorization();
+	}
+
+	/*
+	* Authorization Methods
+	*/
+
+	private function setAuthorization() {
+		$this->_auth = $this->input->get_request_header('Authorization');
+		$this->_auth = substr($this->_auth, 7);
+	}
+
+	public function auth() {
+		return $this->_auth;
+	}
+
+	public function __generateToken($data) {
+		$tokenData = array();
+		$tokenData['id'] = $data;
+		$tokenData['timestamp'] = time();
+		return AUTHORIZATION::generateToken($tokenData);
+
+	}
+
+	public function __validateToken($token) {
+		try {
+			if($this->config->item('jwt_expiration') === true) {
+				$tokenData = AUTHORIZATION::validateTimestamp($token);
+			}
+			else {
+				$tokenData = AUTHORIZATION::validateToken($token);
+			}
+			if($tokenData) return $tokenData->id;
+			return false;
+		} catch (Exception $e) {
+			return false;
+		}
+	}
+
+	public function __authorizeToken() {
+		$token = $this->auth();
+		$tokenData = $this->__validateToken($token);
+		if($tokenData) return $tokenData;
+		else return $this->restResponse(null, "Unauthorized", "failed", HTTP_UNAUTHORIZED);
+	}
+
+	public function __refreshToken() {
+		$token = $this->auth();
+		$tokenData = $this->__validateToken($token);
+		if($tokenData) return $this->__generateToken($tokenData);
+		else return $this->restResponse(null, "Unauthorized", "failed", HTTP_UNAUTHORIZED);
 	}
 
 	/*
 	* Data Methods
 	*/
+
+	private function prepareMethodData() {
+		$this->_POST_GLOBAL = json_decode($this->input->raw_input_stream);
+		$this->_GET_GLOBAL = (object) $_GET;
+	}
 
 	public function input($method, $key=NULL, $value=NULL) {
 		if(($method == GET || $method == DELETE)) {
@@ -68,11 +127,6 @@ class REST_Controller extends MY_Controller {
 		return $this->input(DELETE, $key, $value);
 	}
 
-	public function prepareMethodData() {
-		$this->_POST_GLOBAL = json_decode($this->input->raw_input_stream);
-		$this->_GET_GLOBAL = (object) $_GET;
-	}
-
 	 /*
 	 * Response Methods
 	 */
@@ -100,6 +154,24 @@ class REST_Controller extends MY_Controller {
 			->set_header('Cache-Control: no-store, no-cache, must-revalidate')
 			->set_content_type('application/json', 'UTF-8')
 			->set_status_header($HTTPstatus)
-			->set_output($this->jsonResponse($payload, $message, $status));
+			->set_output($this->jsonResponse($payload, $message, $status))
+			->_display();
+		exit();
+	}
+}
+
+class AUTH_REST_Controller extends REST_Controller {
+
+	public function __construct()  {
+		parent::__construct();
+		$this->__authorizeToken();
+	}
+}
+
+class UNAUTH_REST_Controller extends REST_Controller {
+
+	public function __construct()  {
+		parent::__construct();
+
 	}
 }
