@@ -83,3 +83,29 @@ defined('EXIT_USER_INPUT')     OR define('EXIT_USER_INPUT', 7); // invalid user 
 defined('EXIT_DATABASE')       OR define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
+
+
+/*
+|--------------------------------------------------------------------------
+| HTTP Status Codes
+|--------------------------------------------------------------------------
+|
+*/
+defined('HTTP_OK')        			OR define('HTTP_OK', 200);
+defined('HTTP_CREATED')				OR define('HTTP_CREATED', 201);
+defined('HTTP_UNAUTHORIZED')			OR define('HTTP_UNAUTHORIZED', 401);
+defined('HTTP_FORBIDDEN')				OR define('HTTP_FORBIDDEN', 403);
+defined('HTTP_NOT_FOUND')				OR define('HTTP_NOT_FOUND', 404);
+defined('HTTP_INTERNAL_SERVER_ERROR')	OR define('HTTP_INTERNAL_SERVER_ERROR', 500);
+
+/*
+|--------------------------------------------------------------------------
+| HTTP Methods
+|--------------------------------------------------------------------------
+|
+*/
+defined('GET')        	OR define('GET', "GET");
+defined('POST')			OR define('POST', "POST");
+defined('PUT')			OR define('PUT', "PUT");
+defined('PATCH')			OR define('PATCH', "PATCH");
+defined('DELETE')			OR define('DELETE', "DELETE");
