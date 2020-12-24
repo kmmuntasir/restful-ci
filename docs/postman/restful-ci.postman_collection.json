@@ -1,0 +1,247 @@
+{
+	"info": {
+		"_postman_id": "6cfc26e8-8cb4-4ff6-bb07-32bac5fc8668",
+		"name": "restful-ci",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1.x Misc",
+			"item": [
+				{
+					"name": "1.1 Test Response",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpZCI6MTQzNTI3LCJ0aW1lc3RhbXAiOjE1OTY2MzIwMDB9.puJzmZeCOAN4N92ZDhX_l7lubnuCWcFNSPveJZC0MbWrxw10FsZ5qrvIOM-hdjCRqbpGNNzGcHP7h4YtD-Vp0A",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost/restful-ci/Auth_Rest",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"restful-ci",
+								"Auth_Rest"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "1.2 Test Method",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpZCI6MTQzNTI3LCJ0aW1lc3RhbXAiOjE1OTY2MzIwMDB9.puJzmZeCOAN4N92ZDhX_l7lubnuCWcFNSPveJZC0MbWrxw10FsZ5qrvIOM-hdjCRqbpGNNzGcHP7h4YtD-Vp0A",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"muntasir@billah.com\",\n    \"mobile\": \"+8801516180603\",\n    \"password\": \"ABCDEFGHIJK\",\n    \"companyName\": \"Munna Company\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost/restful-ci/Auth_Rest/methodTest?hello=jello&hi=bye",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"restful-ci",
+								"Auth_Rest",
+								"methodTest"
+							],
+							"query": [
+								{
+									"key": "hello",
+									"value": "jello"
+								},
+								{
+									"key": "hi",
+									"value": "bye"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "1.3 Test Token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpZCI6MjUyNzI4LCJ0aW1lc3RhbXAiOjE1ODA1MjU3MzV9.PgTyWbL7S0rCBo-OIFGhMXM13mrWHED64cHN1ekrqfFn92tZYAUJLbE3gs4-dml2balHXwBspaYPjBdRabaCBg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"muntasir@billah.com\",\n    \"mobile\": \"+8801516180603\",\n    \"password\": \"ABCDEFGHIJK\",\n    \"companyName\": \"Munna Company\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost/restful-ci/Auth_Rest/tokenTest?hello=jello&hi=bye",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"restful-ci",
+								"Auth_Rest",
+								"tokenTest"
+							],
+							"query": [
+								{
+									"key": "hello",
+									"value": "jello"
+								},
+								{
+									"key": "hi",
+									"value": "bye"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "1.4 Generate Random Token",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/restful-ci/Unauth_Rest/generateRandomToken",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"restful-ci",
+								"Unauth_Rest",
+								"generateRandomToken"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "1.5 Refresh Token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpZCI6MjUyNzI4LCJ0aW1lc3RhbXAiOjE1ODA1MjU3MzV9.PgTyWbL7S0rCBo-OIFGhMXM13mrWHED64cHN1ekrqfFn92tZYAUJLbE3gs4-dml2balHXwBspaYPjBdRabaCBg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/restful-ci/Auth_Rest/refreshToken",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"restful-ci",
+								"Auth_Rest",
+								"refreshToken"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "1.6 UnAuth Method Test",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/restful-ci/Unauth_Rest/unAuthMethod",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"restful-ci",
+								"Unauth_Rest",
+								"unAuthMethod"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "2.x Register/Login",
+			"item": [
+				{
+					"name": "2.1 Registration",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Loki\",\n\t\"email\": \"loki@asgard.com\",\n\t\"phone\": \"7894561230\",\n\t\"username\": \"sonOfOdin\",\n\t\"password\": \"1234\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost/restful-ci/registration",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"restful-ci",
+								"registration"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
